@@ -22,3 +22,21 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.boxForListItem {
+    padding: 10px;
+    border: 2px solid grey;
+    color: black;
+    font-family: 'Comic Sans MS';
+    margin: 10px;
+    cursor: pointer;
+    /*another test*/
+    background-color: black;
+    border-radius: 10px;
+    transition: background linear 0.3s;
+}
+
+    .boxForListItem:hover {
+        background-color: grey;
+        /*background-image: url('../Image/blue_world_map-wallpaper-1920x1080.jpg');*/
+    }

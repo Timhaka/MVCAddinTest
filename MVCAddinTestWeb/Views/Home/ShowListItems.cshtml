@@ -1,0 +1,82 @@
+﻿@using Microsoft.SharePoint.Client;
+@using Microsoft.SharePoint.Client.Taxonomy;
+@model ListItemCollection
+@{
+    ViewBag.Title = "ShowListItems";
+}
+<head>
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        Office.initialize = function (reason) {
+
+            $(document).ready(() => {
+                $('#run').click(run);
+            });
+
+        };
+
+        async function run(name) {
+
+
+            var jsonString= '@Html.Raw(@ViewBag.JsonTest)';
+            var obj = JSON.parse(jsonString);
+
+            
+            await Word.run(async (context) => {
+
+                const docBody = context.document.body;
+               
+                obj.forEach(function (item) {
+                    docBody.insertParagraph(item, "End")
+                });
+
+                //for (var i = 0; i < obj.; i++) {
+
+                //    var n = obj[i];
+                //    docBody.insertParagraph(n, "Start");
+                //}
+
+                   
+
+                    
+
+
+                //    for (var i = 0; i < obj.lenght; i++) {
+
+                //        var n = obj[i].ToString();
+
+                //        docBody.insertParagraph(n, "Start");
+
+                //}
+
+
+
+
+               //var n = name;
+               // var ipsum = "Bacon ipsum dolor amet venison cow ribeye kevin ham landjaeger, jerky shoulder tongue swine boudin rump ground round. Alcatra hamburger leberkas corned beef buffalo turkey ribeye pastrami jowl ham. Drumstick swine brisket, rump pork loin tenderloinchicken leberkas cow pork belly cupim meatloaf prosciutto. Frankfurter pig pork chop, tenderloin bresaola short ribs burgdoggen cupim chuck. Tenderloin boudin pork chop kielbasa chuck meatloaf hamburger, jerky prosciutto drumstick frankfurter shank. Pig kevin frankfurter cupim tri-tip pork.";
+               // docBody.insertParagraph(name, "Start");
+
+                /**
+                 * Insert your Word code here
+                 */
+                await context.sync();
+            });
+
+        }
+
+
+    </script>
+</head>
+<h2>ShowListItems</h2>
+
+<p>List Name: @ViewBag.Listname</p>
+
+@{
+    foreach (ListItem item in Model)
+    {
+        @Html.DisplayName(item["Title"].ToString() + " "); <br />
+    }
+
+<button id="run" ><span>Run JavaScript</span></button>
+
+}
